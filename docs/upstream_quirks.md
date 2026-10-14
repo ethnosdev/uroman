@@ -10,7 +10,9 @@ This document logs known upstream Python behaviors, bugs, and edge cases discove
 | 1720 | `not regex.search('r[aeiou]', rom)` | Missing `r` raw-string prefix | Searches for literal character `'r'` followed by a vowel instead of standard word boundary or vowel check. |
 | 1613 | `if n_letters == 2: cost = 0 if i == 0 else 0.1` | Uses absolute position `i` instead of relative position | Syllable-initial check in Tibetan vowel picker uses loop variable `i` (global index) instead of `rel_pos == 0`. |
 | 1519 | `if rom.endswith(' ') and ((end == len(full_string)+1) ...)` | Impossible boundary condition | `end` is bounded by `len(full_string)`, so `end == len(full_string)+1` is unreachable. |
-| 2108 | `right_edge.value` in G5 fraction combination | Null dereference risk | `right_edge` can be `None` or not have `value`, causing unhandled Python `AttributeError`. |
+| 174 | `if not (value in (None, [], False)):` | Python `bool` is subclass of `int`, so `0 == False` is True | Drops `num: 0` from `self.__dict__` on `RomRule` (e.g. Klingon 0, Chinese 0). |
+| 358 | `any_not_none(t, num, is_minus_sign, ...)` | `is_minus_sign` is boolean `False` (not `None`) | `any_not_none` is unconditionally `True` for every line with `s`. Combined with line 746 `:::t W` (3 colons typo, causing `t` to be `None`), creates `RomRule(s='Ⴣ', t=None, prov='man')` overwriting the valid `ud` rule. Same for lines 708, 759, 778. |
+| 861 | `if name := self.dict_str[('name', char)]:` | `defaultdict(str)` creates missing keys with value `''` | Inserting dummy `('name', '፡ '): ''` and `('name', ''): ''` keys during `second_rom_filter`. |
 
 ## 2. Set-Order Ambiguity Analysis
 

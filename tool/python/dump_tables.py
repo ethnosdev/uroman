@@ -31,7 +31,8 @@ def main():
 
     str_grouped = defaultdict(dict)
     for (k, s), v in u.dict_str.items():
-        str_grouped[k][s] = v
+        if v:
+            str_grouped[k][s] = v
 
     set_grouped = defaultdict(list)
     for (k, s), v in u.dict_set.items():
