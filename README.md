@@ -130,6 +130,14 @@ This package was developed and tested against upstream commit `86a196e363e98df2b
 
 ---
 
-## License
+## License & Attribution
 
-This Dart port is open-sourced under the MIT License. Upstream uroman tables and algorithms are by Ulf Hermjakob, USC Information Sciences Institute.
+This Dart port is open-sourced under the MIT License.
+
+The underlying data tables and original romanization algorithms are from upstream [uroman](https://github.com/isi-nlp/uroman) by Ulf Hermjakob, USC Information Sciences Institute. Any publication of projects using uroman shall acknowledge its use:
+
+> "This project uses the universal romanizer software 'uroman' written by Ulf Hermjakob, USC Information Sciences Institute (2015-2020)".
+>
+> *Bibliography*: Ulf Hermjakob, Jonathan May, and Kevin Knight. 2018. Out-of-the-box universal romanization tool uroman. In *Proceedings of the 56th Annual Meeting of Association for Computational Linguistics, Demo Track*.
+
+See the [LICENSE](LICENSE) file for complete terms.
