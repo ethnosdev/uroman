@@ -58,7 +58,9 @@ class RomRule {
     if (useOnlyAtEndOfWord) map['use-only-at-end-of-word'] = true;
     if (dontUseAtEndOfWord) map['dont-use-at-end-of-word'] = true;
     if (useOnlyForWholeWord) map['use-only-for-whole-word'] = true;
-    if (tAtEndOfSyllable != null) map['t-at-end-of-syllable'] = tAtEndOfSyllable;
+    if (tAtEndOfSyllable != null) {
+      map['t-at-end-of-syllable'] = tAtEndOfSyllable;
+    }
     if (nRestr > 0) map['n-restr'] = nRestr;
     if (isMinusSign) map['is-minus-sign'] = true;
     if (isPlusSign) map['is-plus-sign'] = true;

@@ -6,8 +6,14 @@ void main() {
     test('Nonspacing Mark (Mn)', () {
       expect(UnicodeProps.isNonspacingMark(0x0300), isTrue); // Combining grave
       expect(UnicodeProps.isNonspacingMark(0x0301), isTrue); // Combining acute
-      expect(UnicodeProps.isNonspacingMark(0x094D), isTrue); // Devanagari virama
-      expect(UnicodeProps.isNonspacingMark(0x0E4C), isTrue); // Thai cancellation mark
+      expect(
+        UnicodeProps.isNonspacingMark(0x094D),
+        isTrue,
+      ); // Devanagari virama
+      expect(
+        UnicodeProps.isNonspacingMark(0x0E4C),
+        isTrue,
+      ); // Thai cancellation mark
       expect(UnicodeProps.isNonspacingMark(0x0041), isFalse); // 'A'
     });
 
@@ -21,7 +27,10 @@ void main() {
     test('Space Separator (Zs)', () {
       expect(UnicodeProps.isSpaceSeparator(0x0020), isTrue); // Space
       expect(UnicodeProps.isSpaceSeparator(0x00A0), isTrue); // NBSP
-      expect(UnicodeProps.isSpaceSeparator(0x3000), isTrue); // Ideographic space
+      expect(
+        UnicodeProps.isSpaceSeparator(0x3000),
+        isTrue,
+      ); // Ideographic space
       expect(UnicodeProps.isSpaceSeparator(0x000A), isFalse); // Newline
     });
 
@@ -55,24 +64,45 @@ void main() {
 
   group('UnicodeProps Name Flags', () {
     test('LETTER in name', () {
-      expect(UnicodeProps.hasLetterInName(0x0041), isTrue); // LATIN CAPITAL LETTER A
+      expect(
+        UnicodeProps.hasLetterInName(0x0041),
+        isTrue,
+      ); // LATIN CAPITAL LETTER A
       expect(UnicodeProps.hasLetterInName(0x0030), isFalse); // DIGIT ZERO
-      expect(UnicodeProps.hasLetterInName(0x0F90), isTrue); // TIBETAN SUBJOINED LETTER KA
-      expect(UnicodeProps.hasLetterInName(0x4E00), isFalse); // CJK UNIFIED IDEOGRAPH-4E00
+      expect(
+        UnicodeProps.hasLetterInName(0x0F90),
+        isTrue,
+      ); // TIBETAN SUBJOINED LETTER KA
+      expect(
+        UnicodeProps.hasLetterInName(0x4E00),
+        isFalse,
+      ); // CJK UNIFIED IDEOGRAPH-4E00
     });
 
     test('SUBJOINED LETTER in name', () {
-      expect(UnicodeProps.hasSubjoinedInName(0x0FB0), isTrue); // TIBETAN SUBJOINED LETTER -HA
-      expect(UnicodeProps.hasSubjoinedInName(0x0F40), isFalse); // TIBETAN LETTER KA
+      expect(
+        UnicodeProps.hasSubjoinedInName(0x0FB0),
+        isTrue,
+      ); // TIBETAN SUBJOINED LETTER -HA
+      expect(
+        UnicodeProps.hasSubjoinedInName(0x0F40),
+        isFalse,
+      ); // TIBETAN LETTER KA
     });
 
     test('NUKTA in name', () {
-      expect(UnicodeProps.hasNuktaInName(0x093C), isTrue); // DEVANAGARI SIGN NUKTA
+      expect(
+        UnicodeProps.hasNuktaInName(0x093C),
+        isTrue,
+      ); // DEVANAGARI SIGN NUKTA
       expect(UnicodeProps.hasNuktaInName(0x0905), isFalse);
     });
 
     test('VOCALIC in name', () {
-      expect(UnicodeProps.hasVocalicInName(0x090B), isTrue); // DEVANAGARI LETTER VOCALIC R
+      expect(
+        UnicodeProps.hasVocalicInName(0x090B),
+        isTrue,
+      ); // DEVANAGARI LETTER VOCALIC R
       expect(UnicodeProps.hasVocalicInName(0x0905), isFalse);
     });
 

@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+
 import 'unicode_tables.g.dart';
 
 /// Provides Unicode property queries matching Python's `unicodedata` behavior.
@@ -38,8 +39,14 @@ class UnicodeProps {
   /// Categories 'L*' (\pL or isalpha).
   static bool isLetter(int cp) => isInRanges(letterCatRanges, cp);
 
+  /// Python `isalpha()` equivalent for Unicode characters.
+  static bool isAlpha(int cp) => isLetter(cp);
+
   /// Categories 'M*' (\pM, nonspacing, spacing combining, and enclosing marks).
   static bool isMark(int cp) => isInRanges(markCatRanges, cp);
+
+  /// Matches `\pL|\pM` (letter or mark).
+  static bool isLetterOrMark(int cp) => isLetter(cp) || isMark(cp);
 
   /// Category 'Lu' (Uppercase Letter).
   static bool isUpper(int cp) => isInRanges(upperCatRanges, cp);
@@ -55,6 +62,7 @@ class UnicodeProps {
 
   /// Character name contains 'SUBJOINED LETTER' (Tibetan subjoined consonants).
   static bool hasSubjoinedInName(int cp) => nameSubjoinedSet.contains(cp);
+  static bool hasSubjoinedLetterInName(int cp) => hasSubjoinedInName(cp);
 
   /// Character name contains 'NUKTA' (Indic nukta marks).
   static bool hasNuktaInName(int cp) => nameNuktaSet.contains(cp);

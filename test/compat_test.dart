@@ -77,7 +77,10 @@ void main() {
   group('py_json Tests', () {
     test('pyJsonString escapes non-ascii and special chars', () {
       expect(pyJsonString('hello'), equals('"hello"'));
-      expect(pyJsonString('quote " and \\ and \n'), equals(r'"quote \" and \\ and \n"'));
+      expect(
+        pyJsonString('quote " and \\ and \n'),
+        equals(r'"quote \" and \\ and \n"'),
+      );
       expect(pyJsonString('И'), equals(r'"\u0418"'));
       expect(pyJsonString('й'), equals(r'"\u0439"'));
       expect(pyJsonString('𓍧'), equals(r'"\ud80c\udf67"'));
@@ -91,7 +94,10 @@ void main() {
     test('pyJsonEdgeList format without commas between edges', () {
       final e1 = pyJsonEdge(0, 1, 'a', 'rom');
       final e2 = pyJsonEdge(1, 2, 'b', 'rom');
-      expect(pyJsonEdgeList([e1, e2]), equals('[[0, 1, "a", "rom"][1, 2, "b", "rom"]]'));
+      expect(
+        pyJsonEdgeList([e1, e2]),
+        equals('[[0, 1, "a", "rom"][1, 2, "b", "rom"]]'),
+      );
     });
   });
 
@@ -128,8 +134,14 @@ void main() {
 
     test('decodeUnicodeEscapes', () {
       expect(PyString.decodeUnicodeEscapes(r'\u03C0\u03B9'), equals('πι'));
-      expect(PyString.decodeUnicodeEscapes(r'prefix \x22 quote'), equals(r'prefix \x22 quote'));
-      expect(PyString.decodeUnicodeEscapes(r'regular text'), equals('regular text'));
+      expect(
+        PyString.decodeUnicodeEscapes(r'prefix \x22 quote'),
+        equals(r'prefix \x22 quote'),
+      );
+      expect(
+        PyString.decodeUnicodeEscapes(r'regular text'),
+        equals('regular text'),
+      );
     });
   });
 }

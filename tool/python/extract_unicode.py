@@ -7,6 +7,9 @@ import re
 import sys
 import unicodedata as ud
 
+sys.path.insert(0, '/private/tmp/uroman-py/uroman')
+from uroman import Uroman
+
 def build_ranges(pred):
     ranges = []
     start = None
@@ -27,6 +30,8 @@ def main():
     out_dir = repo_root / 'lib' / 'src' / 'unicode'
     out_dir.mkdir(parents=True, exist_ok=True)
     out_file = out_dir / 'unicode_tables.g.dart'
+
+    uroman_obj = Uroman((repo_root / 'data').resolve(), cache_size=0)
 
     print('Extracting general category ranges...')
     mn_ranges = build_ranges(lambda c: ud.category(c) == 'Mn')
@@ -88,7 +93,7 @@ def main():
                 except ValueError:
                     other_comps.append(elem)
         if format_comps and (format_comps[0] not in ('<super>', '<sub>', '<noBreak>', '<compat>')) and not other_comps and decomp_s:
-            decomp_rom[cp] = decomp_s
+            decomp_rom[cp] = uroman_obj.romanize_string(decomp_s)
 
         if '<fraction>' in d:
             s = ''

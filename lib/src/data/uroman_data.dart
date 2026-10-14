@@ -8,6 +8,8 @@ class UromanData {
   final Map<String, Script> scripts = {};
   final Map<String, NumProp> numProps = {};
   final Set<String> sPrefixes = {};
+  Set<String> get sPrefix => sPrefixes;
+  final Map<String, (String?, String?, String)> abugidaCache = {};
 
   // Properties equivalent to Python's dict_str
   final Map<String, String> charToScript = {};
@@ -46,22 +48,45 @@ class UromanData {
   /// Exports the loaded data into the canonical JSON structure matching tables.json.gz.
   Map<String, dynamic> toCanonicalMap() {
     final dictBool = <String, List<String>>{};
-    if (sPrefixes.isNotEmpty) dictBool['s-prefix'] = sPrefixes.toList()..sort();
-    if (isLargePower.isNotEmpty) dictBool['is-large-power'] = isLargePower.toList()..sort();
-    if (isMinusSign.isNotEmpty) dictBool['is-minus-sign'] = isMinusSign.toList()..sort();
-    if (isDecimalPoint.isNotEmpty) dictBool['is-decimal-point'] = isDecimalPoint.toList()..sort();
-    if (isVowelSign.isNotEmpty) dictBool['is-vowel-sign'] = isVowelSign.toList()..sort();
-    if (isMedialConsonantSign.isNotEmpty) {
-      dictBool['is-medial-consonant-sign'] = isMedialConsonantSign.toList()..sort();
+    if (sPrefixes.isNotEmpty) {
+      dictBool['s-prefix'] = sPrefixes.toList()..sort();
     }
-    if (isVirama.isNotEmpty) dictBool['is-virama'] = isVirama.toList()..sort();
+    if (isLargePower.isNotEmpty) {
+      dictBool['is-large-power'] = isLargePower.toList()..sort();
+    }
+    if (isMinusSign.isNotEmpty) {
+      dictBool['is-minus-sign'] = isMinusSign.toList()..sort();
+    }
+    if (isDecimalPoint.isNotEmpty) {
+      dictBool['is-decimal-point'] = isDecimalPoint.toList()..sort();
+    }
+    if (isVowelSign.isNotEmpty) {
+      dictBool['is-vowel-sign'] = isVowelSign.toList()..sort();
+    }
+    if (isMedialConsonantSign.isNotEmpty) {
+      dictBool['is-medial-consonant-sign'] = isMedialConsonantSign.toList()
+        ..sort();
+    }
+    if (isVirama.isNotEmpty) {
+      dictBool['is-virama'] = isVirama.toList()..sort();
+    }
 
     final dictStr = <String, Map<String, String>>{};
-    if (charToSyllableInfo.isNotEmpty) dictStr['syllable-info'] = charToSyllableInfo;
-    if (charToToneMark.isNotEmpty) dictStr['tone-mark'] = charToToneMark;
-    if (charToName.isNotEmpty) dictStr['name'] = charToName;
-    if (charToPic.isNotEmpty) dictStr['pic'] = charToPic;
-    if (charToScript.isNotEmpty) dictStr['script'] = charToScript;
+    if (charToSyllableInfo.isNotEmpty) {
+      dictStr['syllable-info'] = charToSyllableInfo;
+    }
+    if (charToToneMark.isNotEmpty) {
+      dictStr['tone-mark'] = charToToneMark;
+    }
+    if (charToName.isNotEmpty) {
+      dictStr['name'] = charToName;
+    }
+    if (charToPic.isNotEmpty) {
+      dictStr['pic'] = charToPic;
+    }
+    if (charToScript.isNotEmpty) {
+      dictStr['script'] = charToScript;
+    }
 
     final dictSet = <String, List<String>>{};
     for (final entry in scriptLanguages.entries) {
@@ -74,12 +99,10 @@ class UromanData {
           entry.key: entry.value.map((r) => r.toMap()).toList(),
       },
       'scripts': {
-        for (final entry in scripts.entries)
-          entry.key: entry.value.toMap(),
+        for (final entry in scripts.entries) entry.key: entry.value.toMap(),
       },
       'num_props': {
-        for (final entry in numProps.entries)
-          entry.key: entry.value.toMap(),
+        for (final entry in numProps.entries) entry.key: entry.value.toMap(),
       },
       'dict_bool': dictBool,
       'dict_str': dictStr,

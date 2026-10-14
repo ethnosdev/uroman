@@ -6,7 +6,11 @@ class Rational implements Comparable<Rational> {
   /// Creates a [Rational] reduced to lowest terms with a positive denominator.
   factory Rational(int num, int den) {
     if (den == 0) {
-      throw ArgumentError.value(den, 'denominator', 'Denominator cannot be zero');
+      throw ArgumentError.value(
+        den,
+        'denominator',
+        'Denominator cannot be zero',
+      );
     }
     if (num == 0) {
       return const Rational._(0, 1);

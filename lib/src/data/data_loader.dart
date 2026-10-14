@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import '../compat/py_string.dart';
 import '../models/num_prop.dart';
 import '../models/rom_rule.dart';
@@ -10,10 +11,33 @@ import 'uroman_data.dart';
 class DataLoader {
   /// Pinyin accent reduction map for Chinese_to_Pinyin.txt.
   static const Map<String, String> _pinyinAccents = {
-    'í': 'i', 'ī': 'i', 'è': 'e', 'ā': 'a', 'ì': 'i', 'ǔ': 'u', 'ù': 'u', 'ū': 'u',
-    'à': 'a', 'ǐ': 'i', 'é': 'e', 'ó': 'o', 'ò': 'o', 'ō': 'o', 'ú': 'u', 'ě': 'e',
-    'ē': 'e', 'ǎ': 'a', 'á': 'a', 'ü': 'u', 'ǒ': 'o', 'ǜ': 'u', 'ň': 'n', 'ǚ': 'u',
-    'ǘ': 'u', 'ḿ': 'm', 'ń': 'n',
+    'í': 'i',
+    'ī': 'i',
+    'è': 'e',
+    'ā': 'a',
+    'ì': 'i',
+    'ǔ': 'u',
+    'ù': 'u',
+    'ū': 'u',
+    'à': 'a',
+    'ǐ': 'i',
+    'é': 'e',
+    'ó': 'o',
+    'ò': 'o',
+    'ō': 'o',
+    'ú': 'u',
+    'ě': 'e',
+    'ē': 'e',
+    'ǎ': 'a',
+    'á': 'a',
+    'ü': 'u',
+    'ǒ': 'o',
+    'ǜ': 'u',
+    'ň': 'n',
+    'ǚ': 'u',
+    'ǘ': 'u',
+    'ḿ': 'm',
+    'ń': 'n',
   };
 
   /// Parses slots in a double-colon delimited line (e.g. `::s a ::t b ::cost 0.3`).
@@ -62,7 +86,9 @@ class DataLoader {
         searchIdx = cIdx + 2;
       }
 
-      final val = valStart < valEnd ? line.substring(valStart, valEnd).trim() : '';
+      final val = valStart < valEnd
+          ? line.substring(valStart, valEnd).trim()
+          : '';
       slots[slotName] = val;
       idx = valEnd;
     }
@@ -196,7 +222,9 @@ class DataLoader {
       num? numVal;
       if (slots.containsKey('num')) {
         final numS = slots['num']!;
-        numVal = numS.contains('.') ? double.tryParse(numS) : int.tryParse(numS);
+        numVal = numS.contains('.')
+            ? double.tryParse(numS)
+            : int.tryParse(numS);
         if (s != null) {
           data.charToNum[s] = numVal ?? 0;
         }
@@ -224,8 +252,12 @@ class DataLoader {
           ? lcodeS.split(RegExp(r'[,;]\s*'))
           : const <String>[];
 
-      final useOnlyAtStartOfWord = slots.containsKey('use-only-at-start-of-word');
-      final dontUseAtStartOfWord = slots.containsKey('dont-use-at-start-of-word');
+      final useOnlyAtStartOfWord = slots.containsKey(
+        'use-only-at-start-of-word',
+      );
+      final dontUseAtStartOfWord = slots.containsKey(
+        'dont-use-at-start-of-word',
+      );
       final useOnlyAtEndOfWord = slots.containsKey('use-only-at-end-of-word');
       final dontUseAtEndOfWord = slots.containsKey('dont-use-at-end-of-word');
       final useOnlyForWholeWord = slots.containsKey('use-only-for-whole-word');
@@ -314,19 +346,21 @@ class DataLoader {
     }
 
     final thaiConsonants = [
-      for (var cp = 0x0E01; cp <= 0x0E2E; cp++) String.fromCharCode(cp)
+      for (var cp = 0x0E01; cp <= 0x0E2E; cp++) String.fromCharCode(cp),
     ];
     final thaiVowelModifiers = [
       '\u0E31',
       '\u0E47',
-      for (var cp = 0x0E33; cp <= 0x0E3A; cp++) String.fromCharCode(cp)
+      for (var cp = 0x0E33; cp <= 0x0E3A; cp++) String.fromCharCode(cp),
     ];
 
     for (final c1 in thaiConsonants) {
       for (final v in thaiVowelModifiers) {
         final s = c1 + v + thaiCancellationMark;
         if (data.romRules[s] == null || data.romRules[s]!.isEmpty) {
-          data.romRules[s] = [RomRule(s: s, t: '', prov: 'auto cancel syllable')];
+          data.romRules[s] = [
+            RomRule(s: s, t: '', prov: 'auto cancel syllable'),
+          ];
           data.registerSPrefix(s);
         }
       }
@@ -343,7 +377,12 @@ class DataLoader {
         final chinese = parts[0];
         final pinyin = parts[1];
         final rom = deAccentPinyin(pinyin);
-        final newRomRule = RomRule(s: chinese, t: rom, prov: 'rom pinyin', lcodes: const []);
+        final newRomRule = RomRule(
+          s: chinese,
+          t: rom,
+          prov: 'rom pinyin',
+          lcodes: const [],
+        );
         (data.romRules[chinese] ??= []).add(newRomRule);
         data.registerSPrefix(chinese);
       }
@@ -447,7 +486,10 @@ class DataLoader {
         addScriptChars(slots['char']);
         addScriptChars(slots['numeral']);
         addFlagChars(slots['vowel-sign'], data.isVowelSign);
-        addFlagChars(slots['medial-consonant-sign'], data.isMedialConsonantSign);
+        addFlagChars(
+          slots['medial-consonant-sign'],
+          data.isMedialConsonantSign,
+        );
         addFlagChars(slots['sign-virama'], data.isVirama);
       }
     }

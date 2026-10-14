@@ -29,13 +29,13 @@ class Edge {
 
   /// Standard RFC 8259 JSON map for modern Dart/Flutter APIs.
   Map<String, dynamic> toJson() => {
-        'start': start,
-        'end': end,
-        'txt': txt,
-        'type': type,
-        'utf16Start': utf16Start,
-        'utf16End': utf16End,
-      };
+    'start': start,
+    'end': end,
+    'txt': txt,
+    'type': type,
+    'utf16Start': utf16Start,
+    'utf16End': utf16End,
+  };
 
   @override
   String toString() => '[$start-$end] $txt ($type)';
@@ -62,9 +62,9 @@ class NumEdge extends Edge {
     this.active = false,
     int utf16Start = 0,
     int utf16End = 0,
-  })  : origTxt = s,
-        isLargePower = false,
-        super(start, end, s, null, utf16Start, utf16End) {
+  }) : origTxt = s,
+       isLargePower = false,
+       super(start, end, s, null, utf16Start, utf16End) {
     if (start + 1 == end && numProp != null) {
       active = true;
       value = numProp.value;
@@ -108,12 +108,15 @@ class NumEdge extends Edge {
     } else if (this.value == null) {
       vStr = '';
     } else if (this.value is double && this.nDecimals != null) {
-      vStr = this.valueS ?? pyFormatFloat(this.value as double, this.nDecimals!);
+      vStr =
+          this.valueS ?? pyFormatFloat(this.value as double, this.nDecimals!);
     } else {
       vStr = this.value.toString();
     }
 
-    final fracStr = fraction == null ? '' : '${fraction.numerator}/${fraction.denominator}';
+    final fracStr = this.fraction == null
+        ? ''
+        : '${this.fraction!.numerator}/${this.fraction!.denominator}';
     final delim = (vStr.isNotEmpty && fracStr.isNotEmpty) ? ' ' : '';
     final combined = vStr + delim + fracStr;
     txt = combined.isNotEmpty ? combined : this.origTxt;
