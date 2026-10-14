@@ -1,0 +1,3 @@
+# Upstream uroman pinned commit: https://github.com/isi-nlp/uroman/tree/86a196e363e98df2ba0e86b4ea690676519817f2
+# Commit date: June 2024 (v1.3.1.1)
+regex>=2024.5.15
