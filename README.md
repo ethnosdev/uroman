@@ -131,4 +131,4 @@ The underlying data tables and original romanization algorithms are from upstrea
 >
 > *Bibliography*: Ulf Hermjakob, Jonathan May, and Kevin Knight. 2018. Out-of-the-box universal romanization tool uroman. In *Proceedings of the 56th Annual Meeting of Association for Computational Linguistics, Demo Track*.
 
-See the [LICENSE](LICENSE) and [NOTICE](NOTICE) files for complete terms.
+See the [LICENSE](LICENSE) file for complete terms.
