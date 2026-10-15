@@ -7,42 +7,17 @@ void main() async {
   final uDart = Uroman();
 
   final cases = [
-    (
-      '1. Archaic Georgian Letters',
-      'ჳ Ⴣ Ჳ ⴣ',
-      null,
-      'w W W w',
-    ),
-    (
-      '2. Japanese Small Tsu + Latin',
-      'っb',
-      null,
-      'tsub',
-    ),
-    (
-      '3. Gurmukhi Addak + Latin',
-      '\u0A71k',
-      null,
-      "'k",
-    ),
-    (
-      '4. Chinese Sentence Boundary',
-      '加拿大。',
-      'zho',
-      'jianada.',
-    ),
+    ('1. Archaic Georgian Letters', 'ჳ Ⴣ Ჳ ⴣ', null, 'w W W w'),
+    ('2. Japanese Small Tsu + Latin', 'っb', null, 'tsub'),
+    ('3. Gurmukhi Addak + Latin', '\u0A71k', null, "'k"),
+    ('4. Chinese Sentence Boundary', '加拿大。', 'zho', 'jianada.'),
     (
       '5. Japanese Sentence Boundary',
       'ちょっとまってください。',
       'jpn',
       'chottomattekudasai.',
     ),
-    (
-      '6. Mid-Line CJK Spacing (no space)',
-      '句子一。句子二。',
-      'zho',
-      'juzi1. juzi2.',
-    ),
+    ('6. Mid-Line CJK Spacing (no space)', '句子一。句子二。', 'zho', 'juzi1. juzi2.'),
     (
       '7. Mid-Line CJK Spacing (with space)',
       '句子一。 句子二。',
@@ -75,8 +50,10 @@ void main() async {
       await proc.stdin.close();
 
       var outStr = await proc.stdout.transform(utf8.decoder).join();
-      if (outStr.endsWith('\n')) outStr = outStr.substring(0, outStr.length - 1);
-      if (outStr.endsWith('\r')) outStr = outStr.substring(0, outStr.length - 1);
+      if (outStr.endsWith('\n'))
+        outStr = outStr.substring(0, outStr.length - 1);
+      if (outStr.endsWith('\r'))
+        outStr = outStr.substring(0, outStr.length - 1);
       pyOutput = outStr;
     } catch (e) {
       pyOutput = '(Python unavailable: $e)';

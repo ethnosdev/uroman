@@ -1,0 +1,10 @@
+# Maintenance tools and scripts
+tool/
+
+# Test goldens and test suites (keep package size light for pub.dev consumers)
+test/
+
+# Python development artifacts
+.venv/
+__pycache__/
+*.pyc

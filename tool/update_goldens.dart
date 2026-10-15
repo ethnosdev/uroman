@@ -72,11 +72,15 @@ void main() {
     final multiFile = File('test/fixtures/multi-script.txt');
     final multiLines = const LineSplitter().convert(_readTextFile(multiFile));
 
-    final nocacheOut = File('test/goldens/$fmtName/multi-script.nocache.$fmtName');
+    final nocacheOut = File(
+      'test/goldens/$fmtName/multi-script.nocache.$fmtName',
+    );
     final nocacheLines = uNoCache.romanizeLines(multiLines, format: fmtVal);
     nocacheOut.writeAsStringSync('${nocacheLines.join('\n')}\n');
 
-    final cachedOut = File('test/goldens/$fmtName/multi-script.cached.$fmtName');
+    final cachedOut = File(
+      'test/goldens/$fmtName/multi-script.cached.$fmtName',
+    );
     uCached.resetCache();
     final cachedLines = uCached.romanizeLines(multiLines, format: fmtVal);
     cachedOut.writeAsStringSync('${cachedLines.join('\n')}\n');

@@ -5,15 +5,25 @@ import 'num_prop.dart';
 
 /// Represents a span of text in the lattice with a specific romanization.
 class Edge {
+  /// The starting Unicode code point index (Python-compatible) of this edge in the source text.
   final int start;
+
+  /// The ending Unicode code point index (exclusive, Python-compatible) of this edge in the source text.
   final int end;
+
+  /// The romanized text for this span.
   String txt;
+
+  /// The rule or token type associated with this edge (e.g. `'punc'`, `'word'`, `'num'`).
   String? type;
 
-  /// Native Dart / Flutter UTF-16 code unit offsets.
+  /// Native Dart / Flutter UTF-16 code unit start offset in the source string.
   final int utf16Start;
+
+  /// Native Dart / Flutter UTF-16 code unit end offset (exclusive) in the source string.
   final int utf16End;
 
+  /// Creates a lattice [Edge] spanning [[start], [end]) in code points.
   Edge(
     this.start,
     this.end,
