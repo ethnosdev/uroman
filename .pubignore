@@ -8,3 +8,6 @@ test/
 .venv/
 __pycache__/
 *.pyc
+
+# Internal developer planning docs
+doc/plan.md
