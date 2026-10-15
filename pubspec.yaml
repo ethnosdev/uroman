@@ -1,6 +1,6 @@
 name: uroman
 description: Universal Romanizer (uroman) in pure Dart. Converts text in virtually any script into Latin characters with high fidelity to upstream Python uroman.
-version: 1.0.0
+version: 1.1.0
 repository: https://github.com/ethnosdev/uroman
 topics:
   - romanization

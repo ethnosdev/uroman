@@ -1,8 +1,8 @@
 # uroman
 
-A fast, clean, pure Dart port of the **Universal Romanizer (uroman)** (v1.3.1.1).
+A Dart port of the **Universal Romanizer (uroman)**.
 
-Converts text in virtually any writing system into the Latin alphabet. Designed for 1:1 output fidelity with upstream Python uroman, while embracing Dart language features, web compatibility, and Flutter usability.
+Converts text in virtually any writing system into the Latin alphabet. Although designed for high fidelity with upstream Python [uroman](https://github.com/isi-nlp/uroman), it diverges to incorporate fixes for known upstream bugs and data typos.
 
 ## Features
 
@@ -11,18 +11,7 @@ Converts text in virtually any writing system into the Latin alphabet. Designed 
 - **Web & WASM Ready**: Core API in `package:uroman/uroman.dart` uses no `dart:io` and runs seamlessly in Flutter Web, Chrome, and Node/WASM.
 - **Flutter Friendly**: Offsets in `Edge` provide both Python code-point indices and native Dart UTF-16 code unit indices, ready for `TextSelection`, `TextSpan`, and in-place highlighting.
 - **High Fidelity**: Differential verification against upstream Python 3.13 uroman across 44,800+ characters, 24 script benchmarks, and multiple formats (`str`, `edges`, `alts`, `lattice`).
-- **Full CLI**: Matches Python uroman command-line interface flags and behaviors.
-
----
-
-## Getting Started
-
-Add `uroman` to your `pubspec.yaml`:
-
-```yaml
-dependencies:
-  uroman: ^1.0.0
-```
+- **Full CLI**: Matches all user-facing Python uroman command-line interface flags and behaviors.
 
 ---
 
@@ -38,9 +27,9 @@ void main() {
 
   // Basic string romanization
   print(uroman.romanizeString('Игорь Стравинский')); // Igor Stravinsky
-  print(uroman.romanizeString('Καλημέρα'));           // Kalemera
+  print(uroman.romanizeString('Καλημέρα'));          // Kalemera
   print(uroman.romanizeString('مرحبا'));             // mrhba
-  print(uroman.romanizeString('三千二百五十四'));     // 3254
+  print(uroman.romanizeString('三千二百五十四'));      // 3254
 }
 ```
 
@@ -100,19 +89,19 @@ cat input.txt | dart run uroman
 
 ### CLI Options
 
-| Flag | Description |
-|---|---|
-| `-i, --input_filename` | Input file (default: stdin) |
-| `-o, --output_filename` | Output file (default: stdout) |
-| `-l, --lcode` | ISO 639-3 language code (e.g. `eng`, `ell`, `hin`) |
-| `-f, --rom_format` | Output format: `str` (default), `edges`, `alts`, `lattice` |
-| `-c, --cache_size` | Token cache size for speed (default: `65536`) |
-| `-d, --decode_unicode` | Decode Unicode escape sequences (e.g. `\u03B4` to δ) |
-| `--max_lines` | Limit romanization to the first N lines |
-| `--silent` | Suppress progress indicators |
-| `--data_dir` | Custom resource directory (defaults to embedded data bundle) |
-| `--version` | Print version |
-| `-h, --help` | Print help |
+| Flag                    | Description                                                  |
+| ----------------------- | ------------------------------------------------------------ |
+| `-i, --input_filename`  | Input file (default: stdin)                                  |
+| `-o, --output_filename` | Output file (default: stdout)                                |
+| `-l, --lcode`           | ISO 639-3 language code (e.g. `eng`, `ell`, `hin`)           |
+| `-f, --rom_format`      | Output format: `str` (default), `edges`, `alts`, `lattice`   |
+| `-c, --cache_size`      | Token cache size for speed (default: `65536`)                |
+| `-d, --decode_unicode`  | Decode Unicode escape sequences (e.g. `\u03B4` to δ)         |
+| `--max_lines`           | Limit romanization to the first N lines                      |
+| `--silent`              | Suppress progress indicators                                 |
+| `--data_dir`            | Custom resource directory (defaults to embedded data bundle) |
+| `--version`             | Print version                                                |
+| `-h, --help`            | Print help                                                   |
 
 ---
 
@@ -124,9 +113,11 @@ To guarantee web compatibility without bloat:
 
 ---
 
-## Upstream Compatibility & Quirks
+## Upstream Compatibility & Improvements
 
-This package was developed and tested against upstream commit `86a196e363e98df2ba0e86b4ea690676519817f2`. Known quirks and bugs in the Python implementation are documented in [doc/upstream_quirks.md](doc/upstream_quirks.md).
+This package was developed and differentially tested against upstream Python uroman (commit `86a196e363e98df2ba0e86b4ea690676519817f2`).
+
+While 99.9%+ of romanization outputs remain identical, this Dart implementation intentionally fixes several known upstream bugs and data typos. For technical details, see: [doc/upstream_quirks.md](doc/upstream_quirks.md).
 
 ---
 

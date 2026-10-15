@@ -1,3 +1,13 @@
+## 1.1.0
+
+Expanded the section to clearly list the improvements made over upstream Python:
+
+- Fixed archaic Georgian letters left unromanized due to table typos.
+- Removed unwanted trailing spaces after CJK and Japanese full stops (。).
+- Protected against cross-script gemination (Japanese small tsu / Gurmukhi addak doubling Latin consonants).
+- Ensured contiguous backwards lattice traversal without skipping vertices.
+- Added direct links to upstream_quirks.md and upstream_bug_report.md for full technical diffs and test cases.
+
 ## 1.0.0
 
 - Initial release of `uroman` in pure Dart matching Python uroman v1.3.1.1.

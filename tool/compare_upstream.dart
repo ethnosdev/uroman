@@ -94,5 +94,5 @@ void main() async {
     }
   }
 
-  print('\n' + '=' * 80);
+  print('\n${'=' * 80}');
 }
