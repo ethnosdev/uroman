@@ -50,10 +50,12 @@ void main() async {
       await proc.stdin.close();
 
       var outStr = await proc.stdout.transform(utf8.decoder).join();
-      if (outStr.endsWith('\n'))
+      if (outStr.endsWith('\n')) {
         outStr = outStr.substring(0, outStr.length - 1);
-      if (outStr.endsWith('\r'))
+      }
+      if (outStr.endsWith('\r')) {
         outStr = outStr.substring(0, outStr.length - 1);
+      }
       pyOutput = outStr;
     } catch (e) {
       pyOutput = '(Python unavailable: $e)';
