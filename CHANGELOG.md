@@ -1,12 +1,12 @@
 ## 1.1.0
 
-Expanded the section to clearly list the improvements made over upstream Python:
+Diverging from the upstream Python with the following improvements:
 
 - Fixed archaic Georgian letters left unromanized due to table typos.
 - Removed unwanted trailing spaces after CJK and Japanese full stops (。).
 - Protected against cross-script gemination (Japanese small tsu / Gurmukhi addak doubling Latin consonants).
 - Ensured contiguous backwards lattice traversal without skipping vertices.
-- Added direct links to upstream_quirks.md and upstream_bug_report.md for full technical diffs and test cases.
+- Added direct links to upstream_quirks.md for technical diffs.
 - Adopted upstream PR #17 fix: guarded right neighbor edge with `!rightEdge.active` in number pipeline fraction and percentage parsing.
 - Added comprehensive regression tests for upstream issues:
   - PR #17 / Issue #16: Chinese fraction and percentage phrases with non-numeric suffixes (e.g. `百分之多少`) and valid percentages (`百分之五十` -> `50%`).
