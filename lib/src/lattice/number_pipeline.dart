@@ -319,7 +319,11 @@ class NumberPipeline {
         if (connectorEnd <= lat.maxVertex &&
             lat.substring(edge.end, connectorEnd) == fractionConnector) {
           final rightEdge = lat.bestRightNeighborEdge(connectorEnd);
-          if (rightEdge is! NumEdge || rightEdge.value == null) continue;
+          if (rightEdge is! NumEdge ||
+              !rightEdge.active ||
+              rightEdge.value == null) {
+            continue;
+          }
 
           if (edge.value == 100) {
             if ((rightEdge.value is int || rightEdge.value is double) &&

@@ -174,5 +174,57 @@ void main() {
       expect(starts, equals([1, 2, 3, 4]), reason: 'Should not skip vertices');
       expect(ends, equals([2, 3, 4, 5]), reason: 'Should be contiguous');
     });
+
+    test('7. Numeric Value 0 Preservation (Chinese 〇 and 零)', () {
+      // In upstream Python uroman line 174, `0 in (None, [], False)` evaluated to True (0 == False),
+      // silently dropping the ::num attribute from rules for Chinese 〇 and 零.
+      expect(uroman.romanizeString('〇'), equals('0'));
+      expect(uroman.romanizeString('零'), equals('0'));
+      expect(uroman.romanizeString('三万零一', lcode: 'zho'), equals('30001'));
+      expect(uroman.romanizeString('〇', lcode: 'zho'), equals('0'));
+      expect(uroman.romanizeString('零', lcode: 'zho'), equals('0'));
+    });
+
+    test(
+        '8. Chinese Fraction/Percentage Parsing with Non-Numeric and Numeric Suffixes (PR #17 & Issue #16)',
+        () {
+      // In upstream Python uroman, best_right_neighbor_edge after 百分之 could return an Edge
+      // instead of a NumEdge, raising `'Edge' object has no attribute 'value'`.
+      const issue16Text =
+          '前三个月的focus的经营率的百分之多少或者是生命周期的focus经营率的百分之多少前者点位高一些或者点位低一些然后我们内部核算差不多这个点位应该是能擦过我们手臂的倍量就ok了这样所以我们我觉得没问题我觉得就这么写就是nre跟认证的费用是要在项目启动开始之前我要收到对吧然后关于倍量的成本的问题我们需要再拿到';
+
+      expect(
+        () => uroman.romanizeString(issue16Text, lcode: 'zho'),
+        returnsNormally,
+      );
+      final res = uroman.romanizeString(issue16Text, lcode: 'zho');
+      expect(res, contains('baifenzhiduoshao'));
+
+      // Also verify valid percentage conversion:
+      expect(uroman.romanizeString('百分之五十', lcode: 'zho'), equals('50%'));
+      expect(uroman.romanizeString('百分之百', lcode: 'zho'), equals('100%'));
+    });
+
+    test('9. Chinese Number Romanization (Issue #19)', () {
+      // Verify Chinese numbers convert accurately to numerical digits
+      expect(uroman.romanizeString('千', lcode: 'zho'), equals('1000'));
+      expect(uroman.romanizeString('千', lcode: 'zh'), equals('1000'));
+      expect(uroman.romanizeString('一千', lcode: 'zho'), equals('1000'));
+      expect(uroman.romanizeString('百', lcode: 'zho'), equals('100'));
+      expect(uroman.romanizeString('一百', lcode: 'zho'), equals('100'));
+      expect(uroman.romanizeString('三万一', lcode: 'zho'), equals('31000'));
+      expect(uroman.romanizeString('三万零一', lcode: 'zho'), equals('30001'));
+    });
+
+    test('10. Cham Script and Typographic Punctuation (Issue #25 & #26)', () {
+      // Cham script transliteration
+      expect(uroman.romanizeString('ꨀꨁꨂꨃꨄꨅ'), equals('aiueaio'));
+
+      // Typographic apostrophe and punctuation preservation in Latin script
+      expect(
+        uroman.romanizeString('[384] Côte d’Ivoire', lcode: 'fra'),
+        equals('[384] Cote d’Ivoire'),
+      );
+    });
   });
 }
