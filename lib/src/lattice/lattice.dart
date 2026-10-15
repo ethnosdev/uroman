@@ -41,10 +41,17 @@ class Lattice {
   /// Tracks which scripts are present in the input string.
   final Set<String> containsScript = {};
 
-  Lattice({required this.originalString, required this.uroman, this.lcode})
-    : codePoints = PyString.toCodePoints(originalString),
-      utf16Offsets = _computeUtf16Offsets(originalString),
-      maxVertex = PyString.toCodePoints(originalString).length {
+  /// Whether the string represented by this lattice ends at the end of the input stream.
+  final bool isAtStringEnd;
+
+  Lattice({
+    required this.originalString,
+    required this.uroman,
+    this.lcode,
+    this.isAtStringEnd = true,
+  }) : codePoints = PyString.toCodePoints(originalString),
+       utf16Offsets = _computeUtf16Offsets(originalString),
+       maxVertex = PyString.toCodePoints(originalString).length {
     _checkForScripts();
   }
 
@@ -182,7 +189,6 @@ class Lattice {
     var romLen = 0;
     var currentEnd = end;
     while (start < currentEnd) {
-      final oldEnd = currentEnd;
       final newEdge = bestLeftNeighborEdge(
         currentEnd,
         skipNumEdge: skipNumEdge,
@@ -191,13 +197,10 @@ class Lattice {
         resultEdges.insert(0, newEdge);
         romLen += newEdge.txt.length;
         currentEnd = newEdge.start;
-      }
-      if (minChar != null && romLen >= minChar) break;
-      // Upstream quirk: Python uroman line 2314 has `if old_end2 >= end2: end2 -= 1`.
-      // Since end2 is new_edge.start <= old_end2, this always decrements currentEnd by 1.
-      if (oldEnd >= currentEnd) {
+      } else {
         currentEnd--;
       }
+      if (minChar != null && romLen >= minChar) break;
     }
     return resultEdges;
   }

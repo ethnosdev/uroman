@@ -124,9 +124,8 @@ class SpecialExpansions {
         return baseRomPlusVowel!;
       }
 
-      // Upstream quirk: searches for literal 'r' followed by vowel: 'r[aeiou]'
       if (WordBoundary.isAtStartOfWord(lat, start) &&
-          !RegExp('r[aeiou]').hasMatch(rom)) {
+          !RegExp(r'[aeiou]').hasMatch(rom)) {
         return baseRomPlusVowel!;
       }
 
@@ -207,10 +206,13 @@ class SpecialExpansions {
     }
 
     // Japanese small tsu (and Gurmukhi addak) consonant doubling
-    if (prevChar.isNotEmpty &&
-        'っッ\u0A71'.contains(prevChar) &&
-        (lat.uroman.charToScript[prevChar] ?? '') ==
-            (lat.uroman.charToScript[prevChar] ?? '')) {
+    final isTsu = prevChar.isNotEmpty && 'っッ'.contains(prevChar);
+    final isAddak = prevChar == '\u0A71';
+    final charScript = lat.uroman.charToScript[firstCharStr] ?? '';
+    final scriptMatches =
+        (isTsu && (charScript == 'Hiragana' || charScript == 'Katakana')) ||
+        (isAddak && charScript == 'Gurmukhi');
+    if (scriptMatches) {
       final mDouble = RegExp(r'^(ch|[bcdfghjklmnpqrstwz])').firstMatch(rom);
       if (mDouble != null) {
         final c1 = mDouble.group(1)!;
@@ -329,8 +331,8 @@ class SpecialExpansions {
     if (rom.startsWith(' ') && (start == 0 || prevChar == ' ')) {
       rom = rom.substring(1);
     }
-    // Upstream quirk: end == len + 1 can never be true, kept for faithfulness
-    if (rom.endsWith(' ') && (end == lat.maxVertex + 1 || nextChar == ' ')) {
+    if (rom.endsWith(' ') &&
+        ((lat.isAtStringEnd && end >= lat.maxVertex) || nextChar == ' ')) {
       rom = rom.substring(0, rom.length - 1);
     }
 

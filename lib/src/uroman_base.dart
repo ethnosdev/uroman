@@ -83,6 +83,7 @@ class Uroman {
           format,
           offset,
           utf16Offset,
+          isAtStringEnd: false,
         );
         if (format == RomFormat.str) {
           resultStr.write(resPre as String);
@@ -98,6 +99,7 @@ class Uroman {
           format,
           offset,
           utf16Offset,
+          isAtStringEnd: rest.isEmpty,
         );
         if (format == RomFormat.str) {
           resultStr.write(resDelim as String);
@@ -114,6 +116,7 @@ class Uroman {
         format,
         offset,
         utf16Offset,
+        isAtStringEnd: true,
       );
       if (format == RomFormat.str) {
         resultStr.write(resRest as String);
@@ -132,21 +135,27 @@ class Uroman {
     String? lcode,
     RomFormat format,
     int offset,
-    int utf16Offset,
-  ) {
+    int utf16Offset, {
+    bool isAtStringEnd = true,
+  }) {
     if (cacheSize > 0) {
-      final cacheKey = '$s:$lcode:$format';
+      final cacheKey = '$s:$lcode:$format:$isAtStringEnd';
       final cached = _romCache[cacheKey];
       if (cached != null) {
         return _applyOffset(cached, offset, utf16Offset);
       }
     }
 
-    final lat = Lattice(originalString: s, uroman: data, lcode: lcode);
+    final lat = Lattice(
+      originalString: s,
+      uroman: data,
+      lcode: lcode,
+      isAtStringEnd: isAtStringEnd,
+    );
     final result = LatticeEngine.romanizeCore(lat, format: format);
 
     if (cacheSize > 0 && _romCacheSize < cacheSize) {
-      final cacheKey = '$s:$lcode:$format';
+      final cacheKey = '$s:$lcode:$format:$isAtStringEnd';
       _romCache[cacheKey] = result;
       _romCacheSize++;
     }

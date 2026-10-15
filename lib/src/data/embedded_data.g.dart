@@ -15711,7 +15711,7 @@ const String _data_romanization_table_txt = r'''
 ::s უ ::t u ::comment Georgian letter un
 ::s ჱ ::t ey ::comment archaic Georgian letter he
 ::s ჲ ::t i ::comment archaic Georgian letter hie
-::s ჳ :::t w ::comment archaic Georgian letter we
+::s ჳ ::t w ::comment archaic Georgian letter we
 ::s ჴ ::t q ::comment archaic Georgian letter har
 ::s ჵ ::t o ::comment archaic Georgian letter hoe
 ::s ჶ ::t f ::comment Georgian letter fi (Greek phi)
@@ -15749,7 +15749,7 @@ const String _data_romanization_table_txt = r'''
 ::s Ⴓ ::t U ::comment Georgian capital letter un
 ::s Ⴡ ::t EY ::comment archaic Georgian capital letter he
 ::s Ⴢ ::t I ::comment archaic Georgian capital letter hie
-::s Ⴣ :::t W ::comment archaic Georgian capitel letter we
+::s Ⴣ ::t W ::comment archaic Georgian capitel letter we
 ::s Ⴤ ::t Q ::comment archaic Georgian capital letter har
 ::s Ⴥ ::t O ::comment archaic Georgian capital letter hoe
 ::s Ⴧ ::t E ::comment archaic Georgian capital letter yn (schwa)
@@ -15762,7 +15762,7 @@ const String _data_romanization_table_txt = r'''
 ::s Უ ::t U ::comment Georgian Mtavruli capital letter un
 ::s Ჱ ::t EY ::comment archaic Georgian Mtavruli capital letter he
 ::s Ჲ ::t I ::comment archaic Georgian Mtavruli capital letter hie
-::s Ჳ :::t W ::comment archaic Georgian Mtavruli capital letter we
+::s Ჳ ::t W ::comment archaic Georgian Mtavruli capital letter we
 ::s Ჴ ::t Q ::comment archaic Georgian Mtavruli capital letter har
 ::s Ჵ ::t O ::comment archaic Georgian Mtavruli capital letter hoe
 ::s Ჶ ::t F ::comment Georgian Mtavruli capital letter fi (Greek phi)
@@ -15781,7 +15781,7 @@ const String _data_romanization_table_txt = r'''
 ::s ⴓ ::t u ::comment Georgian small letter un
 ::s ⴡ ::t ey ::comment archaic Georgian small letter he
 ::s ⴢ ::t i ::comment archaic Georgian small letter hie
-::s ⴣ :::t w ::comment archaic Georgian small letter we
+::s ⴣ ::t w ::comment archaic Georgian small letter we
 ::s ⴤ ::t q ::comment archaic Georgian small letter har
 ::s ⴥ ::t o ::comment archaic Georgian small letter hoe
 ::s ⴧ ::t e ::comment Georgian small letter yn (schwa)

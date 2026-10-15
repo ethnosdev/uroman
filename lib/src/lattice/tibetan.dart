@@ -106,8 +106,7 @@ class Tibetan {
           } else if (nLetters == 1) {
             cost = 0.0;
           } else if (nLetters == 2) {
-            // Upstream quirk: uses i == 0 (global index)
-            cost = (i == 0) ? 0.0 : 0.1;
+            cost = (relPos == 0) ? 0.0 : 0.1;
           } else {
             final goodSuffix = RegExp(
               r"^(?:|[bcdfghjklmnpqrstvwxz]|bh|bs|ch|cs|dd|ddh|"

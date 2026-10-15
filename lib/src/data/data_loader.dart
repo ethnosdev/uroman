@@ -213,7 +213,8 @@ class DataLoader {
         if (syllableInfo != null) data.charToSyllableInfo[s] = syllableInfo;
       } else {
         s = slots['s'] != null ? PyString.dequote(slots['s']!) : null;
-        t = slots['t'] != null ? PyString.dequote(slots['t']!) : null;
+        final rawT = slots['t'] ?? slots[':t'];
+        t = rawT != null ? PyString.dequote(rawT) : null;
         tAtEndOfSyllable = slots['t-end-of-syllable'] != null
             ? PyString.dequote(slots['t-end-of-syllable']!)
             : null;
