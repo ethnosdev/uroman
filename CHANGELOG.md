@@ -1,3 +1,7 @@
+## 1.1.1
+
+- Update README to list all language codes that matter.
+
 ## 1.1.0
 
 Diverging from the upstream Python with the following improvements:

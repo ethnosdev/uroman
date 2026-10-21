@@ -1,6 +1,6 @@
 name: uroman
 description: Universal Romanizer converts text in virtually any script into Latin characters.
-version: 1.1.0
+version: 1.1.1
 repository: https://github.com/ethnosdev/uroman
 topics:
   - romanization

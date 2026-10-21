@@ -45,6 +45,43 @@ print(uroman.romanizeString('Игорь')); // Igor
 print(uroman.romanizeString('Игорь', lcode: 'ukr')); // Yhor
 ```
 
+#### Supported Language Codes
+
+Most writing systems (such as Latin, Hebrew, Chinese Pinyin, Japanese Kana, Korean Hangul, Amharic, etc.) work automatically without specifying a language code.
+
+The optional `lcode` parameter activates specialized phonetic, transliteration, or schwa-deletion rules for the following languages:
+
+| Category | ISO Code | Language | Special Rules |
+| :--- | :--- | :--- | :--- |
+| **Greek** | `ell` | Modern Greek | Digraph pronunciations (`ντ` &rarr; `d`/`nt`, `μπ` &rarr; `b`/`mp`, `γκ` &rarr; `g`) |
+| | `grc` | Ancient / Koine Greek | Classical aspirated consonants and diphthongs |
+| | `pnt` | Pontic Greek | Pontic dialect phonology |
+| **Middle Eastern** | `ara` | Arabic | Solar consonant assimilations and diacritics |
+| | `fas` | Persian / Farsi | Farsi vowel mappings (`e`, `o`) and consonant adjustments |
+| | `pus` | Pashto | Pashto-specific letters (`ښ`, `ږ`, `ځ`, `څ`, etc.) |
+| | `uig` | Uyghur | Uyghur Arabic-script vowel orthography |
+| | `yid` | Yiddish | Hebrew-script Yiddish orthography and digraphs |
+| **Cyrillic** | `rus` | Russian | Russian palatalization and iotated vowel rules |
+| | `ukr` | Ukrainian | Ukrainian `г` &rarr; `h`/`y`, `и` &rarr; `y`, `і` &rarr; `i`, `ї` &rarr; `yi` |
+| | `bel` | Belarusian | Belarusian `ў` &rarr; `w`, `г` &rarr; `h` |
+| | `bul` | Bulgarian | Bulgarian `ъ` &rarr; `a`, `щ` &rarr; `sht` |
+| | `mkd` / `mkd2` | Macedonian | Macedonian `ѓ`, `ќ`, `ѕ`, `џ` (standard & alt without diacritics) |
+| | `srp` / `srp2` | Serbian | Serbian digraphs (`đ` &rarr; `dj`, `џ` &rarr; `dz`; standard & alt) |
+| | `kaz` | Kazakh | Cyrillic Kazakh vowels and consonants (`ә`, `ғ`, `қ`, `ң`, `ө`, `ұ`, `ү`, `h`) |
+| | `kir` | Kyrgyz | Cyrillic Kyrgyz vowels and consonants |
+| | `oss` | Ossetic | Ossetic `æ` and ejectives |
+| **European & Turkic** | `deu` | German | Umlauts (`ä` &rarr; `ae`, `ö` &rarr; `oe`, `ü` &rarr; `ue`) and `ß` &rarr; `ss` |
+| | `tur` | Turkish | Dotted / dotless `i`, `ç` &rarr; `ch`, `ş` &rarr; `sh` |
+| | `lav` | Latvian | Macron vowels (`ā` &rarr; `aa`, etc.) and palatal consonants (`ķ`, `ļ`, `ņ`, `ģ`) |
+| | `lit` | Lithuanian | Ogonek vowels and accents |
+| | `eng` | English | Grade 2 Braille contractions and Latin "oo" alternative |
+| **South Asian (Schwa Rules)** | `san` | Sanskrit | Retains word-final inherent `a` in Devanagari (suppresses schwa deletion) |
+| | `asm` | Assamese | Deletes word-final schwa in Bengali-Assamese script |
+| | `ben` | Bengali | Deletes word-final schwa in Bengali script |
+| | `guj` | Gujarati | Deletes word-final schwa in Gujarati script |
+| | `kas` | Kashmiri | Deletes word-final schwa |
+| | `pan` | Punjabi | Deletes word-final schwa in Gurmukhi script |
+
 ### Formats & Edge Offsets
 
 By default, `romanizeString` returns a plain `String` (`RomFormat.str`). You can also request structured `Edge` objects with offsets for syntax highlighting, search indexing, or alignment:
